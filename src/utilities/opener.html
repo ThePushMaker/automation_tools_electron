@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejecutar Node.js</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="ejecutarCodigo()">Ejecutar Código Node.js</button>
+
+  <script>
+    function ejecutarCodigo() {
+      // Puedes ajustar la ruta al archivo abridor.js según tu estructura de carpetas
+      const rutaNodeScript = './opener.js';
+
+      // Crea una instancia de XMLHttpRequest para ejecutar el código Node.js
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log('Código Node.js ejecutado con éxito');
+          } else {
+            console.error('Error al ejecutar el código Node.js');
+          }
+        }
+      };
+
+      // Abre el script de Node.js mediante una solicitud HTTP GET
+      xhr.open('GET', `http://localhost:3000/${rutaNodeScript}`, true);
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
